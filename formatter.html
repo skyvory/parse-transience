@@ -1,0 +1,79 @@
+<html>
+
+<head>
+  <script>
+    var da = '';
+    function date() {
+      var d = document.getElementById('date').value;
+      d.replace(/[^0-9.]/g, "");
+      d = d.trim();
+      if(d.length > 6) {
+        d = d.substring(d.length-6);
+      }
+      da = "[" + d + "]";
+    }
+
+    var br = '';
+    function brand() {
+      var b = document.getElementById('brand').value;
+      b = b.trim();
+      br = "[" + b + "]";
+    }
+
+    var formatted;
+    function merge() {
+      formatted = da + br + " ";
+      var copyarea = document.querySelector('#format');
+      copyarea.value = formatted;
+      // var val = document.getElementById('format').value;
+      // val = formatted;
+      // val.select();
+      // copyarea.select();
+      // document.execCommand('copy');
+    }
+    function copy() {
+      var copyarea = document.querySelector('#format');
+      copyarea.select();
+      document.execCommand('copy');
+
+    }
+
+    // setInterval(merge(), 500);
+
+    var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
+
+    copyTextareaBtn.addEventListener('click', function (event) {
+      var copyTextarea = document.querySelector('.js-copytextarea');
+      copyTextarea.select();
+
+      var successful = document.execCommand('copy');
+    });
+  </script>
+</head>
+
+<body>
+  Date
+  <input type="number" id="date" oninput="date();merge();" onClick="this.select();">
+  <br> Brand
+  <input type="text" id="brand" oninput="brand();merge();" onClick="this.setSelectionRange(0, this.value.length)">
+  <br>
+  <br>
+
+  <button onclick="copy()">copy copy copy copy<br> copy copy copy</button>
+  
+  <br>
+  <br>
+
+  <textarea id="format"></textarea>
+  <!--<p id="format"></p>-->
+
+  <!--<p>
+    <textarea class="js-copytextarea">Hello I'm some text</textarea>
+  </p>
+
+  <p>
+    <button class="js-textareacopybtn">Copy Textarea</button>
+  </p>-->
+</body>
+
+</html>
